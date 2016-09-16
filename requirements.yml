@@ -1,0 +1,11 @@
+- src: https://github.com/dggreenbaum/docker.ubuntu
+  version: 15.10-wily-hack
+
+- src: https://github.com/dggreenbaum/swarm.kv
+  version: master
+
+- src: https://github.com/dggreenbaum/swarm.master
+  version: master
+
+- src: https://github.com/dggreenbaum/swarm.member
+  version: master

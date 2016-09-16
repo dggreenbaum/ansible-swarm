@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  sudo: true
+  roles:
+    - role: docker.ubuntu
+      docker_opts: >
+        -H unix://
+        -H tcp://0.0.0.0:2375
+        --log-level=debug
+        --cluster-store=consul://{{ hostvars[groups['kv'][0]]['ansible_eth1']['ipv4']['address'] }}:8500
+        --cluster-advertise={{ hostvars[inventory_hostname]['ansible_eth1']['ipv4']['address'] }}:2375
+
+- hosts: kv
+  sudo: true
+  roles:
+    - swarm.kv
+
+- hosts: swarm_member
+  sudo: true
+  roles:
+    - swarm.member
+
+- hosts: swarm_master
+  sudo: true
+  roles:
+    - swarm.master
